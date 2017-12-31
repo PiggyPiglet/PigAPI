@@ -1,0 +1,7 @@
+name: PigAPI
+version: 1.0.0
+main: me.piggypiglet.pigapi.PigAPI
+prefix: [PIG]
+authors: [PiggyPiglet]
+description: Just an api
+website: https://p1g.pw/api
