@@ -1,6 +1,7 @@
 package me.piggypiglet.pigapi.handlers;
 
-import me.piggypiglet.pigapi.objects.Command;
+import me.piggypiglet.pigapi.objects.CMD;
+import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
@@ -9,15 +10,24 @@ import org.bukkit.command.CommandSender;
 // https://www.piggypiglet.me
 // ------------------------------
 public class CommandHandler implements CommandExecutor {
-    private Command[] commands;
+    private CMD[] commands;
 
-    public CommandHandler(Command[] commands) {
+    public CommandHandler(CMD[] commands) {
         this.commands = commands;
     }
-    public boolean onCommand(CommandSender sender, org.bukkit.command.Command cmd, String label, String[] args) {
-        for (Command command : commands) {
-            if (args[0].equalsIgnoreCase(command.cmd)) {
-                command.run(sender, args);
+    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+        for (CMD command : commands) {
+            if (args.length == 0) {
+                if (command.def) {
+                    command.run(sender, args);
+                }
+            } else {
+                if (command.cmd.equalsIgnoreCase(args[0])) {
+                    command.run(sender, args);
+                    return true;
+                } else if (command.cmd.equalsIgnoreCase("*")) {
+                    command.run(sender, args);
+                }
             }
         }
         return true;

@@ -9,14 +9,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 // https://www.piggypiglet.me
 // ------------------------------
 public class ConfigHandler {
-    private ChatHandler chat;
     private FileConfiguration config;
 
     public ConfigHandler(JavaPlugin main) {
-        chat = new ChatHandler(main, null, null);
         config = new Config(main, main.getDataFolder().getPath(), "lang.yml").getConfig();
     }
     public String getMessage(Enum msg) {
-        return chat.cc(config.getString(msg.toString(), "Warning! " + msg.toString() + " is not set in lang.yml"));
+        return config.getString(msg.toString(), "Warning! " + msg.toString() + " is not set in lang.yml");
     }
 }
